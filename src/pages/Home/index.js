@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-
+import * as S from './styled';
 
 function App(props) {
 
@@ -15,9 +15,9 @@ function App(props) {
     const repositories = response.data;
       const repositoriesName = [];
       
-      repositories.map((repository) => {
-        repositoriesName.push(repository.name);
-      });
+      repositories.map((repository) => (
+        repositoriesName.push(repository.name)
+      ));
     
       localStorage.setItem('repositoriesName', JSON.stringify(repositoriesName))
       history.push('/repositories');
@@ -25,12 +25,12 @@ function App(props) {
     });
   }
     return (
-
-      <>
-        <p>{usuario}</p>
-        <input className="usuario" placeholder="Usuário" value={usuario} onChange={e => setUsuario(e.target.value)}/>
-        <button type="button" onClick={handlePesquisa}>Pesquisar</button>
-      </>
+      <S.HomeContainer>
+        <S.Content>
+          <S.Input className="usuario" placeholder="Usuário" value={usuario} onChange={e => setUsuario(e.target.value)}/>
+        <S.Button type="button" onClick={handlePesquisa}>Pesquisar</S.Button>
+        </S.Content>
+      </S.HomeContainer>
     );
 }
 

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from  'react';
+import * as S from './styled'
 
 export default function Repositories() {
     const [repositories,setRepositories] = useState([]);
@@ -6,19 +7,19 @@ export default function Repositories() {
         let repositoriesName = localStorage.getItem('repositoriesName');
         repositoriesName = JSON.parse(repositoriesName);
         setRepositories(repositoriesName);
+        localStorage.clear();
     }, []);
     return (
-        <div>
-            <h1>Repositórios</h1>
-            <ol>
+        <S.Container>
+            <S.Title>Repositórios</S.Title>
+            <S.List>
                 {repositories.map(repository => {
                     return (
-                    <li> {repository}</li>
+                    <S.ListItem> {repository}</S.ListItem>
                     )
                 })}
-            </ol>
-        
-        
-        </div>
+            </S.List>
+            <S.LinkHome to="/">Voltar</S.LinkHome>
+        </S.Container>
         )
 }
